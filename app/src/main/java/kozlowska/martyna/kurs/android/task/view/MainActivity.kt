@@ -1,11 +1,10 @@
-package kozlowska.martyna.kurs.android.task
+package kozlowska.martyna.kurs.android.task.view
 
-import android.graphics.Paint.Align
-import android.health.connect.datatypes.units.Volume
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -34,7 +33,6 @@ import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.FavoriteBorder
@@ -44,15 +42,14 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.CheckboxColors
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -65,43 +62,58 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.modifier.modifierLocalMapOf
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kozlowska.martyna.kurs.android.task.ui.theme.TasksTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            //MySurface()
-            //MyCard()
-            //MyBox()
-            //MyLayoutWeight()
-            //MyClickButton()
-            //MyNumberCounterButtonExcersise()
-            //MyCheckbox()
-            //MyRadioButton()
-            //MySlider()
-            //MyIconButton()
-            //MyShowTimeViewExcersise()
-            //MyLazyColumn()
-            //MyLazyRow()
-            //MyLazyColumnClickExcersise()
-            MyLazyRowClickExcersise()
-            //MyLazyColumnRowExercise()
+            //MyHomeActivityView()
+            MyExerciseActivityView()
 
+        }
+    }
 
+    @Composable
+    fun MyExerciseActivityView() {
+        var text by remember { mutableStateOf( "") }
+        val context = LocalContext.current
+        val intent = Intent(context, MyExerciseActivity::class.java)
+        intent.putExtra("exercise_value", text)
+
+        Column() {
+            OutlinedTextField(
+                value = text,
+                onValueChange = {value ->
+                    text = value
+                },
+                label = {Text(text = "Wpisz tekst")}
+            )
+
+            Button(onClick = {startActivity(intent)}) {
+                Text(text = "Start MyExercise Activity")
+            }
+        }
+    }
+
+    @Composable
+    fun MyHomeActivityView() {
+        val context: Context = LocalContext.current
+        val intent: Intent = Intent(context, HomeActivity::class.java)
+        intent.putExtra("welcome_value", "Przyszlam z MainActivity")
+
+        Button(onClick = {startActivity(intent)}) {
+            Text(text = "Start Home Activity")
         }
     }
 
