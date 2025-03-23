@@ -22,8 +22,6 @@ class TaskViewModel(
     var getAllTasksStatus by mutableStateOf(TaskOperationStatus.UNKNOWN)
     var sendSmsTaskStatus by mutableStateOf<Task?>(null)
 
-    //var titleText by mutableStateOf("")
-
     fun getAllTasks() {
 
         viewModelScope.launch {
