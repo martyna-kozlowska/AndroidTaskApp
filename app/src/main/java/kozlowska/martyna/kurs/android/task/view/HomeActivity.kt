@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -40,32 +39,20 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusModifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
-import kotlinx.coroutines.runBlocking
-import kozlowska.martyna.kurs.android.task.api.ServiceConfiguration
-import kozlowska.martyna.kurs.android.task.api.TaskNetworkRepository
-import kozlowska.martyna.kurs.android.task.database.DatabaseConfiguration
-import kozlowska.martyna.kurs.android.task.database.TaskDatabaseRepository
-import kozlowska.martyna.kurs.android.task.model.Task
 import kozlowska.martyna.kurs.android.task.model.TaskOperationStatus
-import kozlowska.martyna.kurs.android.task.util.StorageOperations
 import kozlowska.martyna.kurs.android.task.viemodel.TaskViewModel
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 //var taskList = mutableListOf<Task>()
@@ -327,7 +314,7 @@ class HomeActivity : ComponentActivity() {
             modifier = Modifier.fillMaxSize()
         ) {
             when (taskViewModel.getAllTasksStatus){
-                TaskOperationStatus.SUCCES, TaskOperationStatus.ERROR -> {
+                TaskOperationStatus.SUCCESS, TaskOperationStatus.ERROR -> {
                     if (taskViewModel.taskList.isEmpty()) {
                         Text(
                             text = "Empty task list",

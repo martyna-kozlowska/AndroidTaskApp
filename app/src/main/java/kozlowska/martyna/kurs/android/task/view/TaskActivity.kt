@@ -57,7 +57,7 @@ class TaskActivity : ComponentActivity() {
 
     private fun observeAddTaskStatus() {
         when (taskViewModel.addEditTaskStatus) {
-            TaskOperationStatus.SUCCES -> {
+            TaskOperationStatus.SUCCESS -> {
                 val intent = Intent(this, HomeActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
                 startActivity(intent)

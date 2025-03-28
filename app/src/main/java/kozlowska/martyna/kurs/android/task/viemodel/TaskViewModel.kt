@@ -29,7 +29,7 @@ class TaskViewModel(
                 getAllTasksStatus = TaskOperationStatus.LOADING
                 taskList = taskNetworkRepository.getAllTasks().toMutableList()
                 taskDatabaseRepository.insertAllTasks(taskList)
-                getAllTasksStatus = TaskOperationStatus.SUCCES
+                getAllTasksStatus = TaskOperationStatus.SUCCESS
             } catch (e: Exception) {
                 taskList = taskDatabaseRepository.getAllTasks()
                 getAllTasksStatus = TaskOperationStatus.ERROR
@@ -44,7 +44,7 @@ class TaskViewModel(
                 addEditTaskStatus = TaskOperationStatus.LOADING
                 val response: TaskIdResponse = taskNetworkRepository.addTask(task)
                 taskDatabaseRepository.insertTask(task.copy(id = response.name))
-                addEditTaskStatus = TaskOperationStatus.SUCCES
+                addEditTaskStatus = TaskOperationStatus.SUCCESS
             } catch (e: Exception) {
                 addEditTaskStatus = TaskOperationStatus.ERROR
             }
@@ -79,7 +79,7 @@ class TaskViewModel(
                 addEditTaskStatus = TaskOperationStatus.LOADING
                 taskNetworkRepository.editTask(task)
                 taskDatabaseRepository.editTask(task)
-                addEditTaskStatus = TaskOperationStatus.SUCCES
+                addEditTaskStatus = TaskOperationStatus.SUCCESS
 
             } catch (e: Exception) {
                 addEditTaskStatus = TaskOperationStatus.ERROR
