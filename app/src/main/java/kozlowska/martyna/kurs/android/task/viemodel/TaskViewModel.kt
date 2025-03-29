@@ -64,9 +64,6 @@ class TaskViewModel(
     }
 
     private fun removeTaskFromList(task: Task) {
-        /*val mutableTaskList = taskList.toMutableList()
-        mutableTaskList.remove(task)
-        taskList = mutableTaskList*/
         taskList.toMutableList().also {
             it.remove(task)
             taskList = it

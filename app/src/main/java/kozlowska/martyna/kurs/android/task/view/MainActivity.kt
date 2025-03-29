@@ -78,9 +78,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            //MyHomeActivityView()
             MyExerciseActivityView()
-
         }
     }
 
@@ -123,7 +121,6 @@ class MainActivity : ComponentActivity() {
             items(count = 100) { columnIndex ->
                 LazyRow() {
                     items(count = 100) { rowIndex ->
-                        //MyLazyItem(number = columnIndex * rowIndex)
                     }
                 }
 
@@ -179,18 +176,9 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun MyLazyColumn() {
-       /* Column() {
-            for (i in 0..100) {
-                Text(text = "item $i")
-        }
-        }*/
-
         val itemList = remember { mutableStateListOf(1, 3, 5, 7, 9, 11) }
 
         LazyColumn() {
-           /*for (i in 0..100) {
-                item {Text(text = "Item $i")}
-            }*/
             items(items = itemList) { item ->
                 Text(text = "$item")
             }
@@ -564,8 +552,6 @@ class MainActivity : ComponentActivity() {
                     text = "testujemy opcje dostepne w modifier",
                     modifier = Modifier
                         .width(75.dp)
-                       // .background(Color.Cyan, CircleShape)
-                       // .clip(CircleShape)
                         .background(Color.Cyan)
                         .padding(8.dp)
                         .rotate(45f)

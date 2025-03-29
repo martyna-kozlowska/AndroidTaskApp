@@ -55,14 +55,8 @@ import kozlowska.martyna.kurs.android.task.model.TaskOperationStatus
 import kozlowska.martyna.kurs.android.task.viemodel.TaskViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-//var taskList = mutableListOf<Task>()
-//val taskNetworkRepository = TaskNetworkRepository(ServiceConfiguration.taskService)
-
-
 class HomeActivity : ComponentActivity() {
 
-    //val taskDatabaseRepository by inject<TaskDatabaseRepository>()
-    //val taskNetworkRepository by inject<TaskNetworkRepository>()
     val taskViewModel by viewModel<TaskViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,29 +64,7 @@ class HomeActivity : ComponentActivity() {
         Log.d("MyTaskApp", "HomeActivity onCreate()")
         taskViewModel.getAllTasks()
 
-        //taskList = StorageOperations.readTaskList(this).toMutableList()
-/*
-        getAllTasksViaNetwork()
-
-
-        //val welcomeValue: String? = intent.getStringExtra("welcome_value")
-        val task = intent.getSerializableExtra("task") as? Task
-        task?.let {
-            //Toast.makeText(this, "task: $task", Toast.LENGTH_LONG).show()
-            //Log.d("MyTasksApp", "task: $task")
-            taskList.add(task)
-            //StorageOperations.writeTaskList(this, taskList)
-            insertTaskToDatabase(task)
-
-            addTaskViaNetwork(task)
-
-        }
-
-*/
-
         setContent {
-            //HomeText(welcomeValue)
-
             HomeView()
             observeGetAllTasksStatus()
 
@@ -113,58 +85,6 @@ class HomeActivity : ComponentActivity() {
             Toast.makeText(this, "Tasks loaded from local stoeage", Toast.LENGTH_LONG).show()
         }
     }
-/*
-    private fun insertTaskToDatabase(task: Task) {
-
-        runBlocking {
-            taskDatabaseRepository.insertTask(task)
-        }
-    }
-
-    private fun insertAllTasksToDatabase(taskList: List<Task>) {
-        runBlocking {
-            taskDatabaseRepository.insertAllTasks(taskList)
-        }
-    }
-
-    private fun getAllTasksFromDatabase() {
-        runBlocking {
-            taskList = taskDatabaseRepository.getAllTasks().toMutableList()
-        }
-    }
-
-    private fun getAllTasksViaNetwork() {
-        val context = this
-
-        runBlocking {
-            try {
-                taskList = taskNetworkRepository.getAllTasks().toMutableList()
-                //StorageOperations.wrteTaskList(context, taskList)
-                insertAllTasksToDatabase(taskList)
-            } catch (e: Exception) {
-                Log.e("MyTaskApp", "Network get all tasks: $e")
-                //taskList = StorageOperations.readTaskList(context).toMutableList()
-                getAllTasksFromDatabase()
-                Toast.makeText(context, "Tasks loaded from local storage", Toast.LENGTH_LONG).show()
-            }
-        }
-
-    }
-
-    private fun addTaskViaNetwork(task: Task) {
-        val context = this
-
-        runBlocking {
-            try {
-                taskNetworkRepository.addTask(task)
-            } catch (e: Exception) {
-                Log.e("MyTaskApp", "Network add task: $e")
-                Toast.makeText(context, "Connection problem. Try again.", Toast.LENGTH_LONG).show()
-            }
-        }
-
-    }
-*/
 
     @OptIn(ExperimentalPermissionsApi::class)
     @Composable
@@ -334,9 +254,6 @@ class HomeActivity : ComponentActivity() {
                 onClick = {
                     val intent = Intent(context, TaskActivity::class.java)
                     startActivity(intent)
-
-                    //finish()
-                    //Log.w("MyTaskApp", "Kliknalem w FAB")
                 },
                 modifier = Modifier
                     .padding(16.dp)
