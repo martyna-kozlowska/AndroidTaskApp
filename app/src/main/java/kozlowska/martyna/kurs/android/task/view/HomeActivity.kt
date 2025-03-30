@@ -122,7 +122,6 @@ class HomeActivity : ComponentActivity() {
                         Text(text = "Permission")
                     }
                 }
-
             },
             title = {
                 Text(text = "Send SMS")
@@ -219,10 +218,7 @@ class HomeActivity : ComponentActivity() {
                             }
                         }
                     }
-
-
                 }
-
             }
         }
     }

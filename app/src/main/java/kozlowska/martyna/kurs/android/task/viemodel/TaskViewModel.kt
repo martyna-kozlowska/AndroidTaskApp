@@ -34,7 +34,6 @@ class TaskViewModel(
                 taskList = taskDatabaseRepository.getAllTasks()
                 getAllTasksStatus = TaskOperationStatus.ERROR
             }
-
         }
     }
 
@@ -84,5 +83,4 @@ class TaskViewModel(
             }
         }
     }
-
 }

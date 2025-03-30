@@ -24,5 +24,4 @@ interface TaskDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun edit(task: Task)
-
 }

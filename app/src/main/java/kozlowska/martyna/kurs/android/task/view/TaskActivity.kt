@@ -63,9 +63,11 @@ class TaskActivity : ComponentActivity() {
                 startActivity(intent)
                 finish()
             }
+
             TaskOperationStatus.ERROR -> {
                 Toast.makeText(this, "Connection problem, try again", Toast.LENGTH_LONG)
             }
+
             TaskOperationStatus.LOADING, TaskOperationStatus.UNKNOWN -> {}
         }
     }
@@ -75,11 +77,11 @@ class TaskActivity : ComponentActivity() {
         val context = LocalContext.current
         val taskColors = ColorType.values()
 
-        var currentColor by rememberSaveable  {
+        var currentColor by rememberSaveable {
             mutableStateOf(editTask?.colorType ?: taskColors.first())
         }
-        var titleText by rememberSaveable  { mutableStateOf(editTask?.title ?: "") }
-        var descriptionText by rememberSaveable  { mutableStateOf(editTask?.description ?: "") }
+        var titleText by rememberSaveable { mutableStateOf(editTask?.title ?: "") }
+        var descriptionText by rememberSaveable { mutableStateOf(editTask?.description ?: "") }
 
         Column(
             modifier = Modifier.padding(20.dp)
@@ -92,17 +94,17 @@ class TaskActivity : ComponentActivity() {
             ) {
                 OutlinedTextField(
                     value = titleText,
-                    onValueChange = {titleText = it},
-                    label = {Text(text = "Title")},
+                    onValueChange = { titleText = it },
+                    label = { Text(text = "Title") },
                     textStyle = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
-                    )
+                )
                 OutlinedTextField(
                     value = descriptionText,
-                    onValueChange = {descriptionText = it},
-                    label = {Text(text = "Description")},
+                    onValueChange = { descriptionText = it },
+                    label = { Text(text = "Description") },
                     textStyle = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -113,19 +115,22 @@ class TaskActivity : ComponentActivity() {
             Spacer(modifier = Modifier.height(20.dp))
 
             LazyRow() {
-                items(items = taskColors){ colorType ->
+                items(items = taskColors) { colorType ->
                     Button(
-                        onClick = {currentColor = colorType},
+                        onClick = { currentColor = colorType },
                         shape = CircleShape,
                         colors = ButtonDefaults.buttonColors(containerColor = colorType.color),
                         elevation = ButtonDefaults.elevatedButtonElevation(defaultElevation = 8.dp),
-                        border = BorderStroke(2.dp, if (currentColor == colorType) Color.Gray else colorType.color),
+                        border = BorderStroke(
+                            2.dp,
+                            if (currentColor == colorType) Color.Gray else colorType.color
+                        ),
                         modifier = Modifier
                             .padding(horizontal = 8.dp)
                             .size(40.dp)
-                    ) {}                    }
-
+                    ) {}
                 }
+            }
             Spacer(modifier = Modifier.height(40.dp))
 
             Button(
@@ -138,11 +143,6 @@ class TaskActivity : ComponentActivity() {
                             description = descriptionText,
                             colorType = currentColor
                         )
-                        /*val intent = Intent(context, HomeActivity::class.java)
-                    intent.putExtra("task", task)
-                    startActivity(intent)
-
-                    finish()*/
 
                         taskViewModel.addTask(task)
                     } else {
@@ -154,22 +154,16 @@ class TaskActivity : ComponentActivity() {
 
                         taskViewModel.editTask(task)
                     }
-
                 },
 
-            ) {
+                ) {
                 if (taskViewModel.addEditTaskStatus == TaskOperationStatus.LOADING) {
                     CircularProgressIndicator(color = Color.White, modifier = Modifier.size(20.dp))
                 } else {
                     Text(text = "Save")
                 }
-
             }
-
-            }
-
-
         }
-
     }
+}
 

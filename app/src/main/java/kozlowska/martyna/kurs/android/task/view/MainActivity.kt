@@ -123,7 +123,6 @@ class MainActivity : ComponentActivity() {
                     items(count = 100) { rowIndex ->
                     }
                 }
-
             }
         }
     }
@@ -222,10 +221,8 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 }
-
             }
         }
-
     }
 
     @Composable
@@ -362,7 +359,6 @@ class MainActivity : ComponentActivity() {
             text = "Card",
             modifier = Modifier.padding(10.dp)
             )
-
         }
     }
 
@@ -378,7 +374,6 @@ class MainActivity : ComponentActivity() {
                 text = "surface",
                 modifier = Modifier.padding(10.dp)
             )
-
         }
     }
 

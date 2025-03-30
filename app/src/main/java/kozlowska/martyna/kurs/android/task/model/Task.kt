@@ -22,5 +22,4 @@ enum class ColorType(val color: Color) {
     GREEN(Color.Cyan),
     YELLOW(Color.Yellow),
     RED(Color.Magenta)
-
 }
