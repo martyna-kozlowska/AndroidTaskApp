@@ -82,7 +82,8 @@ class HomeActivity : ComponentActivity() {
 
     private fun observeGetAllTasksStatus() {
         if (taskViewModel.getAllTasksStatus == TaskOperationStatus.ERROR) {
-            Toast.makeText(this, "Tasks loaded from local stoeage", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Tasks loaded from local stoeage",
+                Toast.LENGTH_LONG).show()
         }
     }
 
@@ -90,7 +91,8 @@ class HomeActivity : ComponentActivity() {
     @Composable
     fun SendSmsAlertDialog() {
         var phoneNumber by rememberSaveable { mutableStateOf("") }
-        var textToSend = "${taskViewModel.sendSmsTaskStatus?.title}\n${taskViewModel.sendSmsTaskStatus?.description}"
+        var textToSend = "${taskViewModel.sendSmsTaskStatus?.title}" +
+                "\n${taskViewModel.sendSmsTaskStatus?.description}"
         val sendSmsPermission = rememberPermissionState(permission = SEND_SMS)
 
         AlertDialog(
@@ -110,7 +112,14 @@ class HomeActivity : ComponentActivity() {
 
                             val smsManager: SmsManager =
                                 this.getSystemService(SmsManager::class.java)
-                            smsManager.sendTextMessage(phoneNumber, null, textToSend, null, null)
+                            smsManager.sendTextMessage(
+                                phoneNumber,
+                                null,
+                                textToSend,
+                                null,
+                                null
+                            )
+
                             Toast.makeText(this, "SMS sent to $phoneNumber", Toast.LENGTH_LONG)
                                 .show()
                         }
@@ -135,7 +144,9 @@ class HomeActivity : ComponentActivity() {
                         value = phoneNumber,
                         onValueChange = {phoneNumber = it},
                         label = { Text(text = "Phone number")},
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Phone
+                        )
                     )
                 }
             }
@@ -164,8 +175,13 @@ class HomeActivity : ComponentActivity() {
             ) {
                 items(items = taskViewModel.taskList) { task->
                     Card(
-                        colors = CardDefaults.cardColors(containerColor = task.colorType.color),
-                        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 10.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = task.colorType.color
+                        ),
+
+                        elevation = CardDefaults.elevatedCardElevation(
+                            defaultElevation = 10.dp
+                        ),
                         modifier = Modifier.clickable {
                             val intent = Intent(context, TaskActivity::class.java)
                             intent.putExtra("edit_task", task)
@@ -190,7 +206,11 @@ class HomeActivity : ComponentActivity() {
                                 )
                             }
                             Column(
-                                modifier = Modifier.padding(top = 8.dp, bottom = 8.dp, end = 8.dp)
+                                modifier = Modifier.padding(
+                                    top = 8.dp,
+                                    bottom = 8.dp,
+                                    end = 8.dp
+                                )
                             ) {
                                 IconButton(
                                     onClick = {
@@ -207,7 +227,8 @@ class HomeActivity : ComponentActivity() {
 
                                 Spacer(modifier = Modifier.height(16.dp))
                                 IconButton(
-                                    onClick = {taskViewModel.sendSmsTaskStatus = task},
+                                    onClick = {
+                                        taskViewModel.sendSmsTaskStatus = task },
                                     modifier = Modifier.size(25.dp)
                                 ) {
                                     Icon(

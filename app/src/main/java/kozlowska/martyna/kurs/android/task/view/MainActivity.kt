@@ -135,7 +135,8 @@ class MainActivity : ComponentActivity() {
             items(count = 100) { index ->
                 Surface(
                     border = BorderStroke(1.dp, Color.Gray),
-                    color = if (selectedIndex == index) Color.LightGray else Color.White,
+                    color = if (selectedIndex == index) Color.LightGray
+                    else Color.White,
                     modifier = Modifier
                         .clickable { selectedIndex = index }
 
@@ -217,7 +218,8 @@ class MainActivity : ComponentActivity() {
                         Icon(
                             imageVector = Icons.Filled.Notifications,
                             contentDescription = "Icon volume max",
-                            tint = if (volumeValue > 0.8f) Color.Red else Color.Black
+                            tint = if (volumeValue > 0.8f) Color.Red
+                            else Color.Black
                         )
                     }
                 }
@@ -230,7 +232,8 @@ class MainActivity : ComponentActivity() {
         var isFavorite by remember { mutableStateOf(false) }
         IconButton(onClick = {isFavorite = !isFavorite}) {
             Icon(
-                imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                imageVector = if (isFavorite) Icons.Filled.Favorite
+                else Icons.Outlined.FavoriteBorder,
                 contentDescription = "favorite icon"
             )
         }
@@ -252,7 +255,11 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun MyRadioButton() {
         var isSelected by remember { mutableStateOf(true) }
-        RadioButton(selected = isSelected, onClick = {if (isSelected) isSelected = false else isSelected = true})
+        RadioButton(selected = isSelected, onClick = {
+            if (isSelected) isSelected = false
+            else isSelected = true
+        }
+        )
     }
 
     @Composable

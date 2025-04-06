@@ -9,7 +9,9 @@ class TaskNetworkRepository(private val taskService: TaskService) {
     }
 
     suspend fun getAllTasks(): List<Task> {
-        return taskService.getAll().map {element -> element.value.copy(id = element.key)}
+        return taskService.getAll().map {
+            element -> element.value.copy(id = element.key)
+        }
     }
 
     suspend fun deleteTask(taskId: String) {

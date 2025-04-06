@@ -65,7 +65,8 @@ class TaskActivity : ComponentActivity() {
             }
 
             TaskOperationStatus.ERROR -> {
-                Toast.makeText(this, "Connection problem, try again", Toast.LENGTH_LONG)
+                Toast.makeText(this,
+                    "Connection problem, try again", Toast.LENGTH_LONG)
             }
 
             TaskOperationStatus.LOADING, TaskOperationStatus.UNKNOWN -> {}
@@ -80,8 +81,13 @@ class TaskActivity : ComponentActivity() {
         var currentColor by rememberSaveable {
             mutableStateOf(editTask?.colorType ?: taskColors.first())
         }
-        var titleText by rememberSaveable { mutableStateOf(editTask?.title ?: "") }
-        var descriptionText by rememberSaveable { mutableStateOf(editTask?.description ?: "") }
+        var titleText by rememberSaveable {
+            mutableStateOf(editTask?.title ?: "")
+        }
+
+        var descriptionText by rememberSaveable {
+            mutableStateOf(editTask?.description ?: "")
+        }
 
         Column(
             modifier = Modifier.padding(20.dp)
@@ -96,7 +102,10 @@ class TaskActivity : ComponentActivity() {
                     value = titleText,
                     onValueChange = { titleText = it },
                     label = { Text(text = "Title") },
-                    textStyle = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold),
+                    textStyle = TextStyle(
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
@@ -105,7 +114,10 @@ class TaskActivity : ComponentActivity() {
                     value = descriptionText,
                     onValueChange = { descriptionText = it },
                     label = { Text(text = "Description") },
-                    textStyle = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold),
+                    textStyle = TextStyle(
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
