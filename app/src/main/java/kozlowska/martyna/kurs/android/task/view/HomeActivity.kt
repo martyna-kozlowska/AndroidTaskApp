@@ -65,11 +65,11 @@ class HomeActivity : ComponentActivity() {
         taskViewModel.getAllTasks()
 
         setContent {
-            HomeView()
+            homeView()
             observeGetAllTasksStatus()
 
             if (taskViewModel.sendSmsTaskStatus != null) {
-                SendSmsAlertDialog()
+                sendSmsAlertDialog()
             }
         }
     }
@@ -89,7 +89,7 @@ class HomeActivity : ComponentActivity() {
 
     @OptIn(ExperimentalPermissionsApi::class)
     @Composable
-    fun SendSmsAlertDialog() {
+    fun sendSmsAlertDialog() {
         var phoneNumber by rememberSaveable { mutableStateOf("") }
         var textToSend = "${taskViewModel.sendSmsTaskStatus?.title}" +
                 "\n${taskViewModel.sendSmsTaskStatus?.description}"
@@ -120,7 +120,10 @@ class HomeActivity : ComponentActivity() {
                                 null
                             )
 
-                            Toast.makeText(this, "SMS sent to $phoneNumber", Toast.LENGTH_LONG)
+                            Toast.makeText(
+                                this,
+                                "SMS sent to $phoneNumber",
+                                Toast.LENGTH_LONG)
                                 .show()
                         }
                     ) {
@@ -154,7 +157,7 @@ class HomeActivity : ComponentActivity() {
     }
 
     @Composable
-    fun TaskListView() {
+    fun taskListView() {
         val context = LocalContext.current
 
         Column(modifier = Modifier.padding(horizontal = 20.dp)) {
@@ -245,7 +248,7 @@ class HomeActivity : ComponentActivity() {
     }
 
     @Composable
-    fun HomeView() {
+    fun homeView() {
         val context = LocalContext.current
         Box(
             modifier = Modifier.fillMaxSize()
@@ -259,7 +262,7 @@ class HomeActivity : ComponentActivity() {
                             modifier = Modifier.align(Alignment.Center)
                         )
                     } else {
-                        TaskListView()
+                        taskListView()
                     }
                 }
                 TaskOperationStatus.LOADING -> CircularProgressIndicator(Modifier.align(Alignment.Center))
